@@ -1,0 +1,38 @@
+package by.grsu.dbobovik.phonestat.db.model;
+
+public class Invoice {
+
+	private Integer id;
+	private Double invoice;
+	private Integer userId;
+
+	@Override
+	public String toString() {
+		return "Invoice [id=" + id + ", invoice=" + invoice + ", userId=" + userId + "]";
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Double getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Double invoice) {
+		this.invoice = invoice;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+}
