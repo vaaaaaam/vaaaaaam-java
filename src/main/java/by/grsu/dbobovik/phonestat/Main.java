@@ -1,43 +1,58 @@
 package by.grsu.dbobovik.phonestat;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import java.net.MalformedURLException;
 
-import by.grsu.dbobovik.phonestat.db.model.Invoice;
-import by.grsu.dbobovik.phonestat.db.model.User;
-import by.grsu.dbobovik.phonestat.db.model.Connection1;
-import by.grsu.dbobovik.phonestat.db.model.Service;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.webapp.WebAppContext;
 
-public class Main {
+/**
+ * Separate startup class for people that want to run the examples directly. Use
+ * parameter -Dcom.sun.management.jmxremote to startup JMX (and e.g. connect
+ * with jconsole).
+ */
+public final class Main {
 
-	public static void main(String[] args) {
+	private Main() {
+	}
 
-		User user = new User();
-		user.setId(1);
-		user.setName("");
-		user.setSurname("");
-		user.setBirthDate(new Timestamp(new Date().getTime()));
-		user.setRole(true);
-		System.out.println(user.toString());
+	/**
+	 * Main function, starts the jetty server.
+	 *
+	 * @param args
+	 * @throws MalformedURLException
+	 */
 
-		Invoice invoice = new Invoice();
-		invoice.setId(1);
-		invoice.setInvoice(null);
-		invoice.setUserId(2);
-		System.out.println(invoice.toString());
+	public static void main(final String[] args) throws MalformedURLException {
+		startInstance(8081);
+	}
 
-		Service service = new Service();
-		service.setId(1);
-		service.setName(2);
-		service.setCost(null);
-		System.out.println(service.toString());
+	private static void startInstance(final int port) throws MalformedURLException {
+		final Server server = new Server();
 
-		Connection1 connection = new Connection1();
-		connection.setId(1);
-		connection.setServiceId(2);
-		connection.setUserId(3);
-		connection.setDate(new Timestamp(new Date().getTime()));
-		System.out.println(connection.toString());
+		final HttpConfiguration httpConfig = new HttpConfiguration();
+		httpConfig.setOutputBufferSize(32768);
 
+		final ServerConnector http = new ServerConnector(server, new HttpConnectionFactory(httpConfig));
+		http.setPort(port);
+		http.setIdleTimeout(1000 * 60 * 60);
+
+		server.addConnector(http);
+
+		final WebAppContext bb = new WebAppContext();
+		bb.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", ".*/[^/]*taglibs.*\\.jar$");
+		bb.setServer(server);
+		bb.setContextPath("/");
+		bb.setWar("src/main/webapp");
+		server.setHandler(bb);
+
+		try {
+			server.start();
+		} catch (final Exception e) {
+			e.printStackTrace();
+			System.exit(100);
+		}
 	}
 }
