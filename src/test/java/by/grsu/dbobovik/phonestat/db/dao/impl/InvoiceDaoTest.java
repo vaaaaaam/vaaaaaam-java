@@ -7,7 +7,6 @@ import by.grsu.dbobovik.phonestat.db.dao.IDao;
 import by.grsu.dbobovik.phonestat.db.dao.impl.InvoiceDaoImpl;
 import by.grsu.dbobovik.phonestat.db.dao.impl.UserDaoImpl;
 import by.grsu.dbobovik.phonestat.db.model.Invoice;
-import by.grsu.dbobovik.phonestat.db.model.Service;
 import by.grsu.dbobovik.phonestat.db.model.User;
 
 public class InvoiceDaoTest extends AbstractTest{

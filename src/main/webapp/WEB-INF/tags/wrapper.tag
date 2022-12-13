@@ -15,12 +15,12 @@
 
 <nav class="deep-purple lighten-3" role="navigation">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo">Vaaam</a>
+        <a id="logo-container" href="indexx.jsp" class="brand-logo">Vaaam</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="mainPage.jsp">Пользователи</a></li>
-            <li><a href="index.jsp">Услуги</a></li>
-            <li><a href="edit.jsp">Счета</a></li>
-            <li><a href="feedbacks.jsp">Абоненты и услуги</a></li>
+            <li><a href="/user">Пользователи</a></li>
+            <li><a href="/connection">Подключения</a></li>
+            <li><a href="/invoice">Счета</a></li>
+            <li><a href="/service">Услуги</a></li>
             <li><% java.util.Date date = new java.util.Date(); out.print(date.toString()); %></li>
         </ul>
     </div>

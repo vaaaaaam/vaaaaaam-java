@@ -1,5 +1,4 @@
-package by.grsu.dbobovik.phonestat;
-
+package by.grsu.dbobovik.phonestat.server;
 import java.net.MalformedURLException;
 
 import org.eclipse.jetty.server.HttpConfiguration;
@@ -13,9 +12,9 @@ import org.eclipse.jetty.webapp.WebAppContext;
  * parameter -Dcom.sun.management.jmxremote to startup JMX (and e.g. connect
  * with jconsole).
  */
-public final class Main {
+public final class StartJetty {
 
-	private Main() {
+	private StartJetty() {
 	}
 
 	/**
